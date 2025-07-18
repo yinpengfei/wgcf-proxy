@@ -87,10 +87,11 @@ _startBrookProxy() {
   # 读取环境变量，支持自定义端口/密码
   BROOK_PORT="${PORT:-1080}"
   BROOK_ADDR="${HOST:-0.0.0.0}"
+  BROOK_PASS="${PASSWORD:-123456}"
 
   # Brook 不需要区分 HTTP/SOCKS5，自动判别，支持同一端口多协议
-  /usr/local/bin/brook server -l "${BROOK_ADDR}:${BROOK_PORT}"  &
-  echo "brook proxy server is running on ${BROOK_ADDR}:${BROOK_PORT} "
+  /usr/local/bin/brook server -l "${BROOK_ADDR}:${BROOK_PORT}" -p "${BROOK_PASS}" &
+  echo "brook proxy server is running on ${BROOK_ADDR}:${BROOK_PORT} (password: ${BROOK_PASS})"
 }
 
 if [ -z "$@" ] || [[ "$1" = -* ]]; then
